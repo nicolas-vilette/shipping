@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  morning_opens_at: 2021-05-17 15:02:02
+  morning_closes_at: 2021-05-17 15:02:02
+  afternoon_opens_at: 2021-05-17 15:02:02
+  afternoon_closes_at: 2021-05-17 15:02:02
+  weekday: 1
+  shop: 
+
+two:
+  morning_opens_at: 2021-05-17 15:02:02
+  morning_closes_at: 2021-05-17 15:02:02
+  afternoon_opens_at: 2021-05-17 15:02:02
+  afternoon_closes_at: 2021-05-17 15:02:02
+  weekday: 1
+  shop: 

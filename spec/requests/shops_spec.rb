@@ -17,7 +17,7 @@ RSpec.describe "/shops", type: :request do
   # Shop. As you add validations to Shop, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    { name: 'ShopName' }
+    { name: 'ShopName', schedules_attributes: {0 => {weekday:"1", shop_status:"1", morning_opens_at:"8:30", morning_closes_at:"12:00", afternoon_opens_at:'13:00', afternoon_closes_at:'20:00'}} }
   }
 
   describe "GET /index" do

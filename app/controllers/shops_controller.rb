@@ -64,6 +64,16 @@ class ShopsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def shop_params
-      params.require(:shop).permit(:name)
+      params.require(:shop).permit(:name,
+        schedules_attributes: [
+                             :id,
+                             :monrning_opens_at,
+                             :morning_closes_at,
+                             :afternoon_opens_at,
+                             :afternoon_closes_at,
+                             :weekday,
+                             :shop_status,
+                             :_destroy,
+                             ])
     end
 end
