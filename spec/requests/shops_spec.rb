@@ -17,7 +17,14 @@ RSpec.describe "/shops", type: :request do
   # Shop. As you add validations to Shop, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    { name: 'ShopName', schedules_attributes: {0 => {weekday:"1", shop_status:"1", morning_opens_at:"8:30", morning_closes_at:"12:00", afternoon_opens_at:'13:00', afternoon_closes_at:'20:00'}} }
+    { name: 'ShopName', schedules_attributes: {0 => {weekday:'0', shop_status:'1', morning_opens_at:'8:30', morning_closes_at:'12:00', afternoon_opens_at:'13:00', afternoon_closes_at:'20:00'},
+                                               1 => {weekday:'1', shop_status:'1', morning_opens_at:'', morning_closes_at:'', afternoon_opens_at:'13:00', afternoon_closes_at:'20:00'},
+                                               2 => {weekday:'2', shop_status:'0', morning_opens_at:'', morning_closes_at:'', afternoon_opens_at:'', afternoon_closes_at:''},
+                                               3 => {weekday:'3', shop_status:'1', morning_opens_at:'8:00', morning_closes_at:'20:00', afternoon_opens_at:'', afternoon_closes_at:''},
+                                               4 => {weekday:'4', shop_status:'0', morning_opens_at:'', morning_closes_at:'', afternoon_opens_at:'', afternoon_closes_at:''},
+                                               5 => {weekday:'5', shop_status:'0', morning_opens_at:'', morning_closes_at:'', afternoon_opens_at:'', afternoon_closes_at:''},
+                                               6 => {weekday:'6', shop_status:'1', morning_opens_at:'', morning_closes_at:'', afternoon_opens_at:'13:00', afternoon_closes_at:'18:00'}
+                                               } }
   }
 
   describe "GET /index" do
