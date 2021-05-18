@@ -1,0 +1,13 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+.item-hidden {
+  display:none
+}
+
+.inline {
+  display: inline;
+}
+
+.schedule-table tr:first-child td {
+  font-weight: bold;
+}

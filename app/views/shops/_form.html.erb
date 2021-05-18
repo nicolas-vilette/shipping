@@ -11,12 +11,68 @@
     </div>
   <% end %>
 
+
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <br>
+
+  <table class="table schedule-editor">
+    <thead>
+      <tr>
+        <th><%= t('Day') %></th>
+        <th colspan="2" class="text-center table-primary"><%= t('Morning opening time') %></th>
+        <th colspan="2" class="text-center table-secondary"><%= t('Afternoon opening time') %></th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+      <% weekdays.each do |day| %>
+
+        <%= form.fields_for :schedules, form.object.schedules.find_or_initialize_by(weekday: day[:value]) do |schedule| %>
+          <tr>
+            <td scope="row">
+              <%= schedule.hidden_field :weekday %>
+              <div class="checkbox">
+                <%= schedule.check_box :shop_status %>
+                <%= schedule.label :shop_status, t(day[:label]) %>
+              </div>
+            </td>
+
+            <td class="text-center">
+              <%= schedule.label :morning_opens_at, class: "item-hidden" %>
+              <%= schedule.time_field :morning_opens_at, {value: time_format(schedule.object.morning_opens_at),  class: 'form-control item-hidden' } %>
+              <span class="badge rounded-pill bg-danger item-hidden closed-shop text-center"><%= t('Closed') %></span>
+            </td>
+
+            <td>
+             <%= schedule.label :morning_closes_at, class: "item-hidden" %>
+             <%= schedule.time_field :morning_closes_at, {value: time_format(schedule.object.morning_closes_at), class: 'form-control item-hidden' } %>
+            </td>
+
+            <td>
+              <%= schedule.label :afternoon_opens_at, class: "item-hidden" %>
+              <%= schedule.time_field :afternoon_opens_at, {value: time_format(schedule.object.afternoon_opens_at),  class: 'form-control item-hidden' } %>
+            </td>
+
+            <td>
+             <%= schedule.label :afternoon_closes_at, class: "item-hidden" %>
+             <%= schedule.time_field :afternoon_closes_at, {value: time_format(schedule.object.afternoon_closes_at), class: 'form-control item-hidden' } %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+
+
+    </tbody>
+  </table>
+
+
+  <div class="actions text-center">
+    <%= form.submit 'Save', class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -1,5 +1,5 @@
 class ShopsController < ApplicationController
-  before_action :set_shop, only: %i[ show edit update destroy ]
+  before_action :set_shop_and_schedules, only: %i[ show edit update destroy ]
 
   # GET /shops or /shops.json
   def index
@@ -38,7 +38,7 @@ class ShopsController < ApplicationController
   def update
     respond_to do |format|
       if @shop.update(shop_params)
-        format.html { redirect_to @shop, notice: "Shop was successfully updated." }
+        format.html { redirect_to edit_shop_path(@shop), notice: "Shop was successfully updated." }
         format.json { render :show, status: :ok, location: @shop }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,8 +58,11 @@ class ShopsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_shop
+    def set_shop_and_schedules
       @shop = Shop.find(params[:id])
+      @today_to_integer = ( Date.current.wday - 1 )
+      @schedules = @shop.schedules
+      @schedules_ordered_by_current_day = @schedules.rotate(@today_to_integer)
     end
 
     # Only allow a list of trusted parameters through.
@@ -67,7 +70,7 @@ class ShopsController < ApplicationController
       params.require(:shop).permit(:name,
         schedules_attributes: [
                              :id,
-                             :monrning_opens_at,
+                             :morning_opens_at,
                              :morning_closes_at,
                              :afternoon_opens_at,
                              :afternoon_closes_at,
